@@ -16,6 +16,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase()
 
     if (command === 'sayhi'){
+        console.log("Running: .sayhi")
         message.channel.send(hello[Math.round(Math.random()*hello.length)])
     }
 })
