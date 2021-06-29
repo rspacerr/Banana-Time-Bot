@@ -1,10 +1,20 @@
+/* bot setup */
 const Discord = require('discord.js')
 const client = new Discord.Client()
-
 const prefix = '.'
 const config = require('./config.json')
-const hello = ['hello', 'ello ello ello', 'guten tag', 'Hello, World', 'Hallo', 'hello!', 'Hello']
 
+/* command setup */
+const fs = require('fs')
+const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'))
+client.commands = new Discord.Collection()
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`)
+
+    client.commands.set(command.name, command)
+}
+
+/* log to console when activated */
 client.once('ready', () => {
     console.log('It\'s banana time.')
 })
@@ -16,8 +26,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase()
 
     if (command === 'sayhi'){
-        console.log("Running: .sayhi")
-        message.channel.send(hello[Math.round(Math.random()*hello.length)])
+        client.commands.get('sayhi').execute(message, args)
     }
 })
 
