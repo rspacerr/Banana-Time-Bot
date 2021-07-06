@@ -2,7 +2,7 @@ const hello = ['hello', 'ello ello ello', 'guten tag', 'Hello, World', 'Hallo', 
 
 module.exports = {
     name: 'sayhi',
-    description: "A warm greeting.",
+    description: `Say Hello`,
     execute(message, args) {
         console.log("Running: .sayhi")
         message.channel.send(hello[Math.round(Math.random()*(hello.length-1))])
