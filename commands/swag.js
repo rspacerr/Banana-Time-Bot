@@ -9,6 +9,7 @@ module.exports = {
             message.channel.send(`${message.author} is ${swag}% swag.`)
             return
         }
-        message.channel.send(`${message.mentions.users.first} is ${swag}% swag.`)
+        const taggedUser = message.mentions.users.first();
+        message.channel.send(`${taggedUser} is ${swag}% swag.`)
     }
 }
