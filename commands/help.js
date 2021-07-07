@@ -1,6 +1,7 @@
 module.exports = {
     name: `help`,
     description: `The command you just used`,
+    aliases: [`helpme`],
     execute(message, args) {
         const data = []
         const { commands } = message.client
