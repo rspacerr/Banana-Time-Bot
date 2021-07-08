@@ -33,6 +33,7 @@ module.exports = {
         }
 
         if (command.description) data.push(`**${command.name}** - ${command.description}`)
+        if (command.aliases) data.push(`**Command Aliases:** ${command.aliases}`)
         else message.channel.send(`Hmm...no description found. You should probably report that to r rr.`)
 
         message.channel.send(data, { split: true })

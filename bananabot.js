@@ -19,13 +19,14 @@ client.once('ready', () => {
 })
 
 client.on('message', message => {
-    if(!message.content.startsWith(prefix) || message.author.bot) return
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const commandName = args.shift().toLowerCase();
 
-    const args = message.content.slice(prefix.length).split(/ +/)
-    const cmd = args.shift().toLowerCase()
-    const command = client.commands.get(cmd)
-        || client.commands.find(a => a.aliases && a.aliases.includes(cmd));;
+	const command = client.commands.get(commandName)
+		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+	if (!command) return;
+	
     command.execute(message, args)
 })
 
