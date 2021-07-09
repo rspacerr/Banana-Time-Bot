@@ -1,4 +1,6 @@
 # Banana Time
 A discord bot built for my friends and I.
-Doesn't do much right now.
+
+Fun Commands:
+.swag --> Compare your swag to other people.
 
