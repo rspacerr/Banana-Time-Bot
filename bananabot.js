@@ -13,11 +13,6 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command)
 }
 
-/* Log to console when activated */
-client.once('ready', () => {
-    console.log('It\'s banana time.')
-})
-
 /* Command handling */
 client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -30,5 +25,16 @@ client.on('message', message => {
 	
     command.execute(message, args)
 })
+
+/* Event handling */
+const eventFiles = fs.readdirSync(`./events`).filter(file => file.endsWith(`.js`))
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`)
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args, client))
+	} else {
+		client.on(event.name, (...args) => event.execute(...arg, client))
+	}
+}
 
 client.login(config.token)
