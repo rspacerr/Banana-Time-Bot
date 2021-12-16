@@ -22,8 +22,7 @@ client.on('message', message => {
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) return;
-	
-    command.execute(message, args)
+	command.execute(message, args, commandName)
 })
 
 /* Event handling */
